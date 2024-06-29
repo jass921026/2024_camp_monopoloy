@@ -96,12 +96,8 @@ const Teams = () => {
                               ? Math.round(item[column.id])
                               : "破產"
                             : column.id === "resources"
-                            ? `Gold: ${item[column.id].gold}, Meat: ${
-                                item[column.id].meat
-                              }, Cola: ${item[column.id].cola}, Wood: ${
-                                item[column.id].wood
-                              }, Metal: ${item[column.id].wood}`
-                            : item[column.id]}
+                              ? `Gold: ${item[column.id].love}, Meat: ${item[column.id].eecoin}`
+                              : item[column.id]}
                         </TableCell>
                       );
                     })}

@@ -94,7 +94,6 @@ const Resources = () => {
   } else {
     return (
       <>
-        {roleId > 20 ? (
           <Container component="main" maxWidth="xs">
             <Box
               sx={{
@@ -203,9 +202,8 @@ const Resources = () => {
               </FormControl>
             </Box>
           </Container>
-        ) : (
-          <></>
-        )}
+
+
         <Paper
           elevation={0}
           sx={{

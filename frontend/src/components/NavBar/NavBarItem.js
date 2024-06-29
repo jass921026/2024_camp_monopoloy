@@ -9,6 +9,7 @@ import EventIcon from "@mui/icons-material/Event";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import MapIcon from "@mui/icons-material/Map";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 
 export const NavBarItems = [
   {
@@ -122,6 +123,13 @@ export const adminItems = [
     shortLabel: "Broadcast",
     route: "broadcast",
   },
+  {
+    id: 15,
+    icon: <AutoGraphIcon />,
+    label: "Resources",
+    shortLabel: "Resources",
+    route: "resources",
+  }
 ];
 
 // export const Navigate = (path) => {

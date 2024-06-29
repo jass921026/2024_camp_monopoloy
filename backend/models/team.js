@@ -7,8 +7,8 @@ const TeamSchema = new Schema({
   money: Number,
   deposit: Number,
   resources: {
-    gold: Number,
-    meat: Number,
+    love: Number,
+    eecoin: Number,
     cola: Number,
     wood: Number,
     metal: Number,
