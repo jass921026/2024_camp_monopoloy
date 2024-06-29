@@ -18,7 +18,7 @@ const Map = () => {
           Game Map
         </Typography>
         <img
-          src="/map.png"
+          src="/EEmap.JPG"
           alt="Map"
           style={{
             maxWidth: "100%",
