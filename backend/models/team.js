@@ -3,19 +3,11 @@ const Schema = mongoose.Schema;
 const TeamSchema = new Schema({
   id: Number,
   teamname: String,
-  // occupation: String,
   money: Number,
   deposit: Number,
-  resourcesName: {
-    love: String,
-    eecoin: String,
-  },
   resources: {
     love: Number,
     eecoin: Number,
-    // cola: Number,
-    // wood: Number,
-    // metal: Number,
   },
   bonus: { value: Number, time: Number, duration: Number },
   soulgem: { value: Boolean, time: Number },

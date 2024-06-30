@@ -183,6 +183,19 @@ const teams = [
   },
 ];
 
+const resources = [
+  {
+    id: 1,
+    name: "總召的愛",
+    price: 20000
+  },
+  {
+    id: 2,
+    name: "EE幣",
+    price: 20000
+  },
+]
+
 const lands = [
   { id: 1, type: "Go", name: "Go格", description: "你夠格嗎" },
   {
@@ -700,6 +713,11 @@ db.once("open", async () => {
     await new Land(ground).save();
   });
   console.log("lands created");
+
+  resources.forEach(async (row) => {
+    await new Resource(row).save();
+  });
+  console.log("resources created");
 
   teams.forEach(async (row) => {
     await new Team(row).save();

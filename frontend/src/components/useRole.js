@@ -9,6 +9,8 @@ const RoleContext = createContext({
   setRoleId: () => {},
   teams: [],
   setTeams: () => {},
+  resources: [],
+  setResources: () => {},
   phase: 1,
   setPhase: () => {},
   buildings: [],

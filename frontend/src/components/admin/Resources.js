@@ -27,11 +27,10 @@ const Resources = () => {
   let flag = false;
   const [team, setTeam] = useState(-1);
   const [mode, setMode] = useState(0);
-  const [resources, setResources] = useState([]);
   const [resourceName, setResourceName] = useState([]);
   const [resourceId, setResourceId] = useState(-1);
   const [number, setNumber] = useState(0);
-  const { roleId, teams, setTeams, filteredBuildings, setNavBarId } =
+  const { roleId, teams, setTeams, setNavBarId, resources, setResources } =
     useContext(RoleContext); // eslint-disable-line no-unused-vars
 
   const navigate = useNavigate();
@@ -39,31 +38,31 @@ const Resources = () => {
   const columns = [
     { id: "name", label: "Type", minWidth: "15vw", align: "center" },
     { id: "price", label: "Price", minWidth: "17vw", align: "center" },
-    { id: "quantity", label: "Quantity Owned", minWidth: "17vw", align: "center"}
   ];
+
+  // const getResourcesQuan = async () => {
+  //   axios
+  //     .get("/resourceInfo")
+  //     .then((res) => {
+  //       setResourceQuan(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
 
   const getResources = async () => {
     axios
       .get("/resourceInfo")
       .then((res) => {
         setResources(res.data);
+        console.log(resources);
       })
       .catch((error) => {
         console.error(error);
       });
   };
-
-  const getResourcesName = async () => {
-    axios
-      .get("/resourceName")
-      .then((res) => {
-        setResourceName(res.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
+  
   const handleClick = async () => {
     const payload = {
       teamId: team,
@@ -91,8 +90,10 @@ const Resources = () => {
   };
 
   useEffect(() => {
+    // getResourcesQuan();
     getResources();
     const update = setInterval(() => {
+      // getResourcesQuan();
       getResources();
       flag = !flag;
       if (flag) updatePrices();
@@ -102,9 +103,6 @@ const Resources = () => {
     return () => clearInterval(update);
   }, []);
 
-  // if (resources.length === 0) {
-  //   return <Loading />;
-  // } else {
     return (
       <>
           <Container component="main" maxWidth="xs">
@@ -117,7 +115,7 @@ const Resources = () => {
               }}
             >
               <Typography component="h1" variant="h5">
-                Resource Trading {resources.length}
+                Resource Trading {resourceName.length}
               </Typography>
 
               <FormControl
@@ -147,11 +145,8 @@ const Resources = () => {
                 >
                   <MenuItem value={-1}>Select Resource</MenuItem>
                   {resources.map((resource, index) => (
-                    <MenuItem value={resource.id} key={resource.id}>
-                      {/* {resource.id} {resource.name} */}
-                      {Object.keys(resource).map((key) => (
-                        <span key={key}>{key} </span>
-                      ))}
+                    <MenuItem value={index} key={index}>
+                      {resource.name}
                     </MenuItem>
                   ))}
                 </Select>
@@ -234,70 +229,111 @@ const Resources = () => {
                   fullWidth
                   sx={{ marginTop: 2 }}
                 >
-                  <SendIcon />
+                  <SendIcon/>
                 </Button>
               </FormControl>
             </Box>
           </Container>
 
-
-        <Paper
-          elevation={0}
-          sx={{
-            overflow: "hidden",
-            paddingTop: "60px",
-            paddingBottom: "60px",
-            marginLeft: "2vw",
-            marginRight: "2vw",
-          }}
-        >
-          <TableContainer
+          <Paper
+            elevation={0}
             sx={{
-              maxHeight: 900,
+              overflow: "hidden",
+              paddingTop: "60px",
+              paddingBottom: "60px",
+              marginLeft: "2vw",
+              marginRight: "2vw",
             }}
           >
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map((item) => (
-                    <TableCell
-                      key={item.id}
-                      align={item.align}
-                      style={{
-                        minWidth: item.minWidth,
-                        fontWeight: "800",
-                        userSelect: "none",
-                      }}
-                    >
-                      {item.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {resources.map((resource) => {
-                  return (
-                    <TableRow key={resource.teamname}>
-                      {columns.map((column) => {
-                        return (
+            <TableContainer
+              sx={{
+                maxHeight: 900,
+              }}
+            >
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {columns.map((item) => (
+                        <TableCell
+                          key={item.id}
+                          align={item.align}
+                          style={{
+                            minWidth: item.minWidth,
+                            fontWeight: "800",
+                            userSelect: "none",
+                          }}
+                        >
+                          {item.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {resources.map((resource, index) => (
+                      <TableRow key={index}>
+                        {columns.map((column) => (
                           <TableCell
                             key={column.id}
                             align={column.align}
                             style={{ userSelect: "none" }}
                           >
                             {column.id === "name"
-                              ? resource.name
-                              : resource.price}
+                              ? resource.name  // Assuming resourceName is aligned with resourcesQuan by index
+                              : column.id === "price"
+                              ? resource.price  // Assuming resourcePrice is aligned with resourcesQuan by index // Use the value from resourceQuan directly
+                              : null}
                           </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
+                        ))}
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+
+              {/* <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {columns.map((item) => (
+                      <TableCell
+                        key={item.id}
+                        align={item.align}
+                        style={{
+                          minWidth: item.minWidth,
+                          fontWeight: "800",
+                          userSelect: "none",
+                        }}
+                      >
+                        {item.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {resourceQuan.map((resource) => {
+                    return (
+                      <TableRow key={resource.teamname}>
+                        {columns.map((column) => {
+                          return (
+                            <TableCell
+                              key={column.id}
+                              align={column.align}
+                              style={{ userSelect: "none" }}
+                            >
+                              {column.id === "name"
+                              ? resourceName
+                              : column.id === "price"
+                              ? resourcePrice
+                              : resourceQuan}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table> */}
+            </TableContainer>
+          </Paper>
+        
       </>
     );
   // }

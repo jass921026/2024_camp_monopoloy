@@ -43,6 +43,7 @@ const App = () => {
   const [role, setRole] = useState(localRole ? localRole : "");
   const [roleId, setRoleId] = useState(localRole ? roleIdMap[role] : 0);
   const [teams, setTeams] = useState([]);
+  const [resources, setResources] = useState([]);
   const [phase, setPhase] = useState("");
   const [buildings, setBuildings] = useState([]);
   const [filteredBuildings, setFilteredBuildings] = useState([]);
@@ -55,6 +56,8 @@ const App = () => {
     setRoleId,
     teams,
     setTeams,
+    resources,
+    setResources,
     phase,
     setPhase,
     buildings,

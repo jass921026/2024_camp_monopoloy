@@ -324,24 +324,28 @@ router.get("/getRent", async (req, res) => {
 //   res.json(resources).status(200);
 // });
 
-// Assuming you have a route to get resource info
 router.get('/resourceInfo', async (req, res) => {
+  const resources = await Resource.find().sort({ id: 1 });
+  res.json(resources).status(200);
+});
+
+router.get("/resourceName", async (req, res) => {
   try {
-    const teams = await Team.find();
-    const resources = teams.map(team => team.resources);
-    res.json(resources);
+    const resources = await Resource.find();
+    const resourcesName = resources.map(resource => resource.name);
+    res.json(resourcesName);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
-router.get('resourceName', async (req, res) => {
+router.get("resourcePrice", async (req, res) => {
   try {
-    const teams = await Team.find();
-    const resourcesName = teams.map(team => team.resourcesName);
-    res.json(resourcesName);
+    const resources = await Resource.find();
+    const resourcesPrice = resources.map(resource => resource.price);
+    res.json(resourcesPrice);
   } catch (error) {
-    res.status(500).send
+    res.status(500).send(error);
   }
 });
 
