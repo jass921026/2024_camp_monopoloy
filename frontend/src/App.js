@@ -93,7 +93,7 @@ const App = () => {
               <Route path="setshop" element={<SetShopLevel />} />
               <Route path="random" element={<Random />} />
               <Route path="event" element={<Event />} />
-              <Route path="resources" element={<Resources />} />
+              <Route path="resources" element={<Resources/>} />
               <Route path="additional" element={<Additional />} />
               <Route path="setoccupation" element={<SetOccupation />} />
               <Route path="permission" element={<PermissionDenied />} />

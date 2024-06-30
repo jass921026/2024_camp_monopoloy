@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@mui/system";
-// import ReactLoading from "react-loading";
+import ReactLoading from "react-loading";
 
 const Loading = () => {
   return (
@@ -11,7 +11,7 @@ const Loading = () => {
       mx="auto"
       minHeight="100vh"
     >
-      {/* <ReactLoading type="spinningBubbles" color="#006db3" /> */}
+      <ReactLoading type="spinningBubbles" color="#006db3" />
     </Box>
   );
 };

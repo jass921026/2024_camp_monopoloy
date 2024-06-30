@@ -96,7 +96,7 @@ const Teams = () => {
                               ? Math.round(item[column.id])
                               : "破產"
                             : column.id === "resources"
-                              ? `Gold: ${item[column.id].love}, Meat: ${item[column.id].eecoin}`
+                              ? `總召的愛: ${item[column.id].love}, EE幣: ${item[column.id].eecoin}`
                               : item[column.id]}
                         </TableCell>
                       );

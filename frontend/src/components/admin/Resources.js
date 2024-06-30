@@ -28,6 +28,7 @@ const Resources = () => {
   const [team, setTeam] = useState(-1);
   const [mode, setMode] = useState(0);
   const [resources, setResources] = useState([]);
+  const [resourceName, setResourceName] = useState([]);
   const [resourceId, setResourceId] = useState(-1);
   const [number, setNumber] = useState(0);
   const { roleId, teams, setTeams, filteredBuildings, setNavBarId } =
@@ -38,6 +39,7 @@ const Resources = () => {
   const columns = [
     { id: "name", label: "Type", minWidth: "15vw", align: "center" },
     { id: "price", label: "Price", minWidth: "17vw", align: "center" },
+    { id: "quantity", label: "Quantity Owned", minWidth: "17vw", align: "center"}
   ];
 
   const getResources = async () => {
@@ -45,6 +47,17 @@ const Resources = () => {
       .get("/resourceInfo")
       .then((res) => {
         setResources(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const getResourcesName = async () => {
+    axios
+      .get("/resourceName")
+      .then((res) => {
+        setResourceName(res.data);
       })
       .catch((error) => {
         console.error(error);
@@ -89,9 +102,9 @@ const Resources = () => {
     return () => clearInterval(update);
   }, []);
 
-  if (resources.length === 0) {
-    return <Loading />;
-  } else {
+  // if (resources.length === 0) {
+  //   return <Loading />;
+  // } else {
     return (
       <>
           <Container component="main" maxWidth="xs">
@@ -104,7 +117,7 @@ const Resources = () => {
               }}
             >
               <Typography component="h1" variant="h5">
-                Resource Trading
+                Resource Trading {resources.length}
               </Typography>
 
               <FormControl
@@ -115,9 +128,11 @@ const Resources = () => {
                   label="Team"
                   team={team}
                   handleTeam={handleTeam}
-                  hasZero={true}
+                  hasZero={false}
                 />
               </FormControl>
+
+
               <FormControl
                 variant="standard"
                 sx={{ minWidth: 250, marginTop: 2 }}
@@ -131,13 +146,35 @@ const Resources = () => {
                   }}
                 >
                   <MenuItem value={-1}>Select Resource</MenuItem>
-                  {resources.map((resource) => (
+                  {resources.map((resource, index) => (
                     <MenuItem value={resource.id} key={resource.id}>
-                      {resource.id} {resource.name}
+                      {/* {resource.id} {resource.name} */}
+                      {Object.keys(resource).map((key) => (
+                        <span key={key}>{key} </span>
+                      ))}
                     </MenuItem>
                   ))}
                 </Select>
+
+            {/* <Select
+              value={resourceId}
+              labelId="resource"
+              onChange={(e) => {
+                setResourceId(e.target.value);
+              }}
+            >
+              <MenuItem value={-1}>Select Resource</MenuItem>
+              {resources.map((resource, index) => (
+                <MenuItem value={index} key={index}>
+                  {Object.keys(resource).map((key) => (
+                    <span key={key}>{key}, </span>
+                  ))}
+                </MenuItem>
+              ))}
+            </Select> */}
               </FormControl>
+
+
               <FormControl
                 variant="standard"
                 sx={{ minWidth: 250, marginTop: 2 }}
@@ -263,7 +300,7 @@ const Resources = () => {
         </Paper>
       </>
     );
-  }
+  // }
 };
 
 export default Resources;
