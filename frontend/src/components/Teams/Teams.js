@@ -32,6 +32,9 @@ const Teams = () => {
       .catch((error) => {
         console.error(error);
       });
+
+    // console.log("getTeams");
+    // console.log(teams[5]);
   };
 
   useEffect(() => {
@@ -81,9 +84,9 @@ const Teams = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {teams.map((item) => {
+              {teams.map((team) => {
                 return (
-                  <TableRow key={item.teamname}>
+                  <TableRow key={team.teamname}>
                     {columns.map((column) => {
                       return (
                         <TableCell
@@ -92,12 +95,12 @@ const Teams = () => {
                           style={{ userSelect: "none" }}
                         >
                           {column.id === "money"
-                            ? Math.round(item[column.id]) > 0
-                              ? Math.round(item[column.id])
+                            ? Math.round(team[column.id]) > 0
+                              ? Math.round(team[column.id])
                               : "破產"
                             : column.id === "resources"
-                              ? `總召的愛: ${item[column.id].love}, EE幣: ${item[column.id].eecoin}`
-                              : item[column.id]}
+                              ? `總召的愛: ${team[column.id].love}, EE幣: ${team[column.id].eecoin}`
+                              : team[column.id]}
                         </TableCell>
                       );
                     })}

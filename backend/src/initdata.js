@@ -185,14 +185,14 @@ const teams = [
 
 const resources = [
   {
-    id: 1,
+    id: 0,
     name: "總召的愛",
-    price: 20000
+    price: 2000
   },
   {
-    id: 2,
+    id: 1,
     name: "EE幣",
-    price: 20000
+    price: 2000
   },
 ]
 

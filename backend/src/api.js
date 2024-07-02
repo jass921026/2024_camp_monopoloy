@@ -351,25 +351,47 @@ router.get("resourcePrice", async (req, res) => {
 
 router.post("/sellResource", async (req, res) => {
   const { teamId, resourceId, number, mode } = req.body;
+  const team = await Team.collection.findOne({ id: teamId });
+  const resource = await Resource.collection.findOne({ id: resourceId });
 
-  const team = await Team.find({ id: teamId });
-  const resource = await Resource.find({ id: resourceId });
-
-  if (mode === 0) {
-    await Team.findOneAndUpdate(
-      { id: teamId },
-      {
-        money: team[0].money + resource[0].price * number,
-      }
-    );
-  } else if (mode === 1) {
-    await Team.findOneAndUpdate(
-      { id: teamId },
-      {
-        money: team[0].money - resource[0].price * number,
-      }
-    );
+  if (mode === 0) {//sell
+    if(resourceId == 0){ //love
+      await Team.findOneAndUpdate(
+        { id: teamId },
+        { 
+          resources: { love : team.resources.love - number, eecoin : team.resources.eecoin },
+          money: team.money + resource.price * number
+        }
+      );
+    }else if(resourceId == 1){ //eecoin
+      await Team.findOneAndUpdate(
+        { id: teamId },
+        {
+          resources: {love : team.resources.love, eecoin : team.resources.eecoin - number},
+          money: team.money + resource.price * number
+        }
+      );
+    }
+  } else if (mode === 1) {//buy
+    if(resourceId == 0){
+      await Team.findOneAndUpdate(//love
+        { id: teamId },
+        {
+          resources: { love: team.resources.love + number, eecoin: team.resources.eecoin },
+          money: team.money - resource.price * number,
+        }
+      );
+    }else if(resourceId == 1){//eecoin
+      await Team.findOneAndUpdate(
+        { id: teamId },
+        {
+          resources: { love: team.resources.love, eecoin: team.resources.eecoin + number },
+          money: team.money - resource.price * number,
+        }
+      );
+    }
   }
+  
   res.json("Success").status(200);
 });
 

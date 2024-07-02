@@ -62,6 +62,11 @@ const Resources = () => {
         console.error(error);
       });
   };
+
+  // const getTeam = async () => {
+  //   axios
+  //     .get("/team")
+      
   
   const handleClick = async () => {
     const payload = {
@@ -70,6 +75,8 @@ const Resources = () => {
       number: number,
       mode: mode,
     };
+
+    console.log(payload);
     await axios.post("/sellResource", payload);
     navigate("/teams");
     setNavBarId(2);
