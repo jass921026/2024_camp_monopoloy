@@ -26,8 +26,9 @@ import TeamSelect from "../TeamSelect";
 const Resources = () => {
   let flag = false;
   const [team, setTeam] = useState(-1);
+  const [teamToCheckBalance, setTeamToCheckBalance] = useState(0);
+  const [resourceToCheckQuan, setResourceToCheckQuan] = useState(0);
   const [mode, setMode] = useState(0);
-  const [resourceName, setResourceName] = useState([]);
   const [resourceId, setResourceId] = useState(-1);
   const [number, setNumber] = useState(0);
   const { roleId, teams, setTeams, setNavBarId, resources, setResources } =
@@ -40,32 +41,37 @@ const Resources = () => {
     { id: "price", label: "Price", minWidth: "17vw", align: "center" },
   ];
 
-  // const getResourcesQuan = async () => {
-  //   axios
-  //     .get("/resourceInfo")
-  //     .then((res) => {
-  //       setResourceQuan(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
-
   const getResources = async () => {
     axios
       .get("/resourceInfo")
       .then((res) => {
         setResources(res.data);
-        console.log(resources);
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-  // const getTeam = async () => {
-  //   axios
-  //     .get("/team")
+  const getCheck = async (team, resourceId) => {
+    axios
+      .get("/team/" + team)
+      .then((res) => {
+        setTeamToCheckBalance(res.data.money);
+
+        if(resourceId == 0){
+          setResourceToCheckQuan(res.data.resources.love);
+          console.log(res.data.resources.love);
+          console.log(resourceToCheckQuan);
+        }else if(resourceId == 1){
+          setResourceToCheckQuan(res.data.resources.eecoin);
+        }
+
+        console.log(resourceToCheckQuan);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
       
   
   const handleClick = async () => {
@@ -73,10 +79,27 @@ const Resources = () => {
       teamId: team,
       resourceId: resourceId,
       number: number,
-      mode: mode,
+      mode: mode, // 0 for sell, 1 for buy
     };
 
     console.log(payload);
+    //check whether the trade is valid
+    getCheck(team, resourceId);
+
+    if(mode === 1){//buy
+      console.log(resources[resourceId].price * number);
+      console.log(teamToCheckBalance);
+      if(teamToCheckBalance < resources[resourceId].price * number){
+        alert("Not enough money to buy");
+        return;
+      }
+    }else{//sell
+      if(resourceToCheckQuan < number){
+        alert("Not enough resource to sell");
+        return;
+      }
+    }
+
     await axios.post("/sellResource", payload);
     navigate("/teams");
     setNavBarId(2);
@@ -110,6 +133,9 @@ const Resources = () => {
     return () => clearInterval(update);
   }, []);
 
+  if (teams.length === 0) {
+    return <Loading />;
+  } else {
     return (
       <>
           <Container component="main" maxWidth="xs">
@@ -122,7 +148,7 @@ const Resources = () => {
               }}
             >
               <Typography component="h1" variant="h5">
-                Resource Trading {resourceName.length}
+                Resource Trading
               </Typography>
 
               <FormControl
@@ -295,55 +321,12 @@ const Resources = () => {
                     ))}
                   </TableBody>
                 </Table>
-
-              {/* <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    {columns.map((item) => (
-                      <TableCell
-                        key={item.id}
-                        align={item.align}
-                        style={{
-                          minWidth: item.minWidth,
-                          fontWeight: "800",
-                          userSelect: "none",
-                        }}
-                      >
-                        {item.label}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {resourceQuan.map((resource) => {
-                    return (
-                      <TableRow key={resource.teamname}>
-                        {columns.map((column) => {
-                          return (
-                            <TableCell
-                              key={column.id}
-                              align={column.align}
-                              style={{ userSelect: "none" }}
-                            >
-                              {column.id === "name"
-                              ? resourceName
-                              : column.id === "price"
-                              ? resourcePrice
-                              : resourceQuan}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table> */}
             </TableContainer>
           </Paper>
         
       </>
     );
-  // }
+  }
 };
 
 export default Resources;

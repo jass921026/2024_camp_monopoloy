@@ -158,7 +158,10 @@ const Bank = () => {
                     ) {
                       if (Math.abs(parseInt(e.target.value)) > 1000000) {
                         setErrorMessage("Too Large");
-                      } else {
+                      }else if(parseInt(e.target.value) > 0 && Math.abs(parseInt(e.target.value)) > teamData.deposit) {
+                        setErrorMessage("Not enough deposit");
+                      }
+                      else {
                         handleAmount(e.target.value ? e.target.value : "");
                         setErrorMessage("");
                       }

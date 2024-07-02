@@ -97,7 +97,7 @@ const Teams = () => {
                           {column.id === "money"
                             ? Math.round(team[column.id]) > 0
                               ? Math.round(team[column.id])
-                              : "破產"
+                              : `${Math.round(team[column.id])} (破產)`
                             : column.id === "resources"
                               ? `總召的愛: ${team[column.id].love}, EE幣: ${team[column.id].eecoin}`
                               : team[column.id]}
