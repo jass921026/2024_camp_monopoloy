@@ -187,12 +187,12 @@ const resources = [
   {
     id: 0,
     name: "總召的愛",
-    price: 2000
+    price: 20000
   },
   {
     id: 1,
     name: "EE幣",
-    price: 2000
+    price: 10000
   },
 ]
 

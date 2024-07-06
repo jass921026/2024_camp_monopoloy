@@ -339,7 +339,7 @@ router.get("/resourceName", async (req, res) => {
   }
 });
 
-router.get("resourcePrice", async (req, res) => {
+router.get("/resourcePrice", async (req, res) => {
   try {
     const resources = await Resource.find();
     const resourcesPrice = resources.map(resource => resource.price);

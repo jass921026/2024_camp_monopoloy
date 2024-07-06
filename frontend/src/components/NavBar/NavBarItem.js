@@ -78,6 +78,13 @@ export const NPCItems = [
     shortLabel: "Bank",
     route: "bank",
   },
+  {
+    id: 15,
+    icon: <AutoGraphIcon />, //resource
+    label: "Resources",
+    shortLabel: "Resources",
+    route: "resources",
+  }
   // {
   //   id: 14,
   //   icon: <QuizIcon />,
@@ -122,13 +129,6 @@ export const adminItems = [
     label: "Broadcast",
     shortLabel: "Broadcast",
     route: "broadcast",
-  },
-  {
-    id: 15,
-    icon: <AutoGraphIcon />,
-    label: "Resources",
-    shortLabel: "Resources",
-    route: "resources",
   }
 ];
 
