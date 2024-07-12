@@ -32,6 +32,7 @@ import theme from "./theme";
 import SetDice from "./components/NPC/SetDice";
 import Map from "./components/Properties/Map";
 import Random from "./components/NPC/Random";
+import SetResources from "./components/admin/SetResources";
 // import SetPrices from "./components/admin/Resources";
 // import Resource from "../../backend/models/resource";
 // // import { socket, SocketContext } from "./websocket";
@@ -106,6 +107,7 @@ const App = () => {
               <Route path="broadcast" element={<Broadcast />} />
               <Route path="setdice" element={<SetDice />} />
               <Route path="map" element={<Map />} />
+              <Route path="setresources" element={<SetResources />} />
             </Routes>
           </CSSTransition>
         </TransitionGroup>

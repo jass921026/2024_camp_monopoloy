@@ -10,6 +10,7 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import MapIcon from "@mui/icons-material/Map";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import CalculateIcon from '@mui/icons-material/Calculate';
 
 export const NavBarItems = [
   {
@@ -129,6 +130,13 @@ export const adminItems = [
     label: "Broadcast",
     shortLabel: "Broadcast",
     route: "broadcast",
+  },
+  {
+    id: 16, 
+    icon: <CalculateIcon />,
+    label: "SetResources",
+    shortLabel: "SetResources",
+    route: "setresources",
   }
 ];
 
