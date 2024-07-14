@@ -51,6 +51,43 @@ const Transfer = () => {
     // console.log(data);
     setFromData(data);
     setFrom(from);
+
+    console.log(fromData.resources.love);
+
+    if(fromData.resources.love === 1) {
+      setAmount(amount * 0.95);
+      setErrorMessage("Auto Fill Love");
+    }
+    else if(fromData.resources.love == 2) {
+      setAmount(amount * 0.9);
+      setErrorMessage("Auto Fill Love");
+    }
+    else if(fromData.resources.love == 3) {
+      setAmount(amount * 0.85);
+      setErrorMessage("Auto Fill Love");
+    }
+    else if(fromData.resources.love == 4) {
+      setAmount(amount * 0.82);
+      setErrorMessage("Auto Fill Love");
+    }
+    else if(fromData.resources.love == 5) {
+      setAmount(amount * 0.79);
+      setErrorMessage("Auto Fill Love");
+    }
+    else if(fromData.resources.love == 6) {
+      setAmount(amount * 0.76);
+      setErrorMessage("Auto Fill Love");
+    }
+    else if(fromData.resources.love == 7) {
+      setAmount(amount * 0.73);
+      setErrorMessage("Auto Fill Love");
+    }
+    else if(fromData.resources.love >= 8) {
+      setAmount(amount * 0.7);
+      setErrorMessage("Auto Fill Love");
+    }
+
+    console.log(amount);
   };
 
   const handleTo = async (to, newBuildingData) => {
@@ -94,9 +131,18 @@ const Transfer = () => {
       IsEstate: building !== -1,
       dollar: parseInt(amount),
     };
+
+    console.log(payload);
+
+    console.log("before post");
     await axios.post("/transfer", payload);
+    console.log("after post");
     navigate("/teams");
     setNavBarId(2);
+  };
+
+  const handleDiscount = () => {
+    console.log("discount");
   };
 
   const handleBuilding = async (building) => {
@@ -399,14 +445,14 @@ const Transfer = () => {
             >
               Equal
             </Button> */}
-            <Button
+            {/* <Button
               variant="contained"
               sx={{ marginBottom: 1 }}
               disabled={to === -1 || from === -1}
               onClick={() => handlePercentMoney(0.5)}
             >
               raise
-            </Button>
+            </Button> */}
 
             {/* <Button
               variant="contained"

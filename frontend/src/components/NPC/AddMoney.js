@@ -427,8 +427,7 @@ const AddMoney = () => {
                   disabled={
                     team === -1 ||
                     amount === "0" ||
-                    building === -1 ||
-                    checkMessage !== "OK"
+                    building === -1 
                   }
                   onClick={handleSubmitAndSetOwnership}
                   fullWidth

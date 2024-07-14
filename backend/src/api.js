@@ -906,7 +906,9 @@ router.post("/transfer", async (req, res) => {
     await Team.findOneAndUpdate({ id: from }, { money: data.from });
     await Team.findOneAndUpdate({ id: to }, { money: data.to });
     res.status(200).send("Update succeeded");
+    console.log("success");
   }
+  console.log("in transfer");
 });
 
 router.get("/transfer", async (req, res) => {
