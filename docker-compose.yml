@@ -7,7 +7,7 @@ services:
     networks:
       - monopoly-mongodb
   monopoly-web:
-    image: lin1214/camp_monopoly
+    image: jass921026/camp_monopoly
     expose:
       - "2022"
     depends_on:
