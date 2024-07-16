@@ -58,27 +58,27 @@ const Transfer = () => {
       setAmount(amount * 0.95);
       setErrorMessage("Auto Fill Love");
     }
-    else if(fromData.resources.love == 2) {
+    else if(fromData.resources.love === 2) {
       setAmount(amount * 0.9);
       setErrorMessage("Auto Fill Love");
     }
-    else if(fromData.resources.love == 3) {
+    else if(fromData.resources.love === 3) {
       setAmount(amount * 0.85);
       setErrorMessage("Auto Fill Love");
     }
-    else if(fromData.resources.love == 4) {
+    else if(fromData.resources.love === 4) {
       setAmount(amount * 0.82);
       setErrorMessage("Auto Fill Love");
     }
-    else if(fromData.resources.love == 5) {
+    else if(fromData.resources.love === 5) {
       setAmount(amount * 0.79);
       setErrorMessage("Auto Fill Love");
     }
-    else if(fromData.resources.love == 6) {
+    else if(fromData.resources.love === 6) {
       setAmount(amount * 0.76);
       setErrorMessage("Auto Fill Love");
     }
-    else if(fromData.resources.love == 7) {
+    else if(fromData.resources.love === 7) {
       setAmount(amount * 0.73);
       setErrorMessage("Auto Fill Love");
     }
