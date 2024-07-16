@@ -1,5 +1,5 @@
 yarn build-frontend
 docker-compose down
-docker image rm rayray2002/monopoly
-docker build . -t rayray2002/monopoly
-docker push rayray2002/monopoly
+docker image rm jass921026/monopoly
+docker build . -t jass921026/monopoly
+docker push jass921026/monopoly
