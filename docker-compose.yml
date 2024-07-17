@@ -5,9 +5,9 @@ services:
     expose:
       - "27017"
     networks:
-      - monopoly-mongodb
+      - monopoly
   monopoly-web:
-    image: jass921026/camp_monopoly
+    image: jass921026/monopoly
     expose:
       - "2022"
     depends_on:
@@ -18,12 +18,10 @@ services:
     tty: true
     stdin_open: true
     networks:
-      - monopoly-web
+      - monopoly
+      - nginx
 
 networks:
-  monopoly-mongodb:
-    external:
-      name: eeinfo
-  monopoly-web:
-    external:
-      name: eeinfo
+  nginx:
+    external: true
+  monopoly:
