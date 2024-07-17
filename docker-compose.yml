@@ -1,15 +1,19 @@
 version: "3"
 services:
   monopoly-mongodb:
+    container_name: monopoly-mongodb
     image: mongo
     expose:
       - "27017"
     networks:
       - monopoly
   monopoly-web:
+    container_name: monopoly-web
     image: jass921026/monopoly
     expose:
       - "2022"
+    ports:
+      - "2022:2022"
     depends_on:
       - monopoly-mongodb
     environment:
