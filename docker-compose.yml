@@ -7,6 +7,10 @@ services:
       - "27017"
     networks:
       - monopoly
+    volumes:
+      - ./mongodbdata:/data/db
+    restart: unless-stopped
+
   monopoly-web:
     container_name: monopoly-web
     image: jass921026/monopoly
@@ -17,6 +21,7 @@ services:
     depends_on:
       - monopoly-mongodb
     environment:
+      REACT_APP_API_URL: https://eecamp-monopoly-2024.ntuee.org/api
       MONGO_URL: mongodb://monopoly-mongodb/monopoly
       WEB_DOMAIN: eecamp-monopoly.ntuee.org
     tty: true
@@ -24,6 +29,7 @@ services:
     networks:
       - monopoly
       - nginx
+    restart: unless-stopped
 
 networks:
   nginx:
